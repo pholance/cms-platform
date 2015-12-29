@@ -75,18 +75,19 @@ public class Resource {
 
         Resource resource = (Resource) o;
 
-        if (id != resource.id) return false;
+        if (id != null ? !id.equals(resource.id) : resource.id != null) return false;
         if (title != null ? !title.equals(resource.title) : resource.title != null) return false;
         if (createDate != null ? !createDate.equals(resource.createDate) : resource.createDate != null) return false;
+        return !(group != null ? !group.equals(resource.group) : resource.group != null);
 
-        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
+        result = 31 * result + (group != null ? group.hashCode() : 0);
         return result;
     }
 }

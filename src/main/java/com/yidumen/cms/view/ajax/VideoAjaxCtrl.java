@@ -10,8 +10,6 @@ import com.yidumen.cms.service.VideoService;
 import com.yidumen.cms.service.exception.IllDataException;
 import com.yidumen.cms.view.DWZResponse;
 import com.yidumen.cms.view.DWZResponseBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
@@ -34,7 +32,6 @@ import java.util.Map;
 @RestController("videoApi")
 @RequestMapping("video")
 public class VideoAjaxCtrl {
-    private final static Logger LOG = LoggerFactory.getLogger(VideoAjaxCtrl.class);
     @Autowired
     private VideoService service;
     @Autowired
@@ -85,7 +82,11 @@ public class VideoAjaxCtrl {
     @Transactional
     @RequestMapping(value = "update/{isUpdateDate}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public DWZResponse update(@PathVariable boolean isUpdateDate, @RequestBody Video video) {
-        service.updateVideo(video, isUpdateDate);
+        try {
+            service.updateVideo(video, isUpdateDate);
+        } catch (IllDataException e) {
+            return DWZResponseBuilder.initiate().error(e.getLocalizedMessage()).builder();
+        }
         return DWZResponseBuilder.initiate().success("视频 " + video.getFile() + " 信息已成功更新").forwardUrl("/site/video/manager").builder();
     }
 
@@ -103,12 +104,16 @@ public class VideoAjaxCtrl {
     @Transactional
     @RequestMapping(value = "updateAndArchive/{isUpdateDate}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public DWZResponse updateAndArchive(@PathVariable boolean isUpdateDate, @RequestBody Video video) {
-        service.updateAndArchive(video, isUpdateDate);
+        try {
+            service.updateAndArchive(video, isUpdateDate);
+        } catch (IllDataException e) {
+            return DWZResponseBuilder.initiate().error(e.getLocalizedMessage()).builder();
+        }
         return DWZResponseBuilder.initiate().success("视频 " + video.getFile() + " 信息已更新并归档").forwardUrl("/site/video/manager").builder();
     }
 
     @Transactional
-    @RequestMapping(value = "create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public DWZResponse create(@RequestBody Video video) {
         try {
             service.addVideo(video);

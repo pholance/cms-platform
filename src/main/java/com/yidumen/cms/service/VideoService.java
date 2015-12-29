@@ -24,7 +24,7 @@ import java.util.Map;
 @Service
 public final class VideoService {
 
-    private final Logger log = LoggerFactory.getLogger(VideoService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(VideoService.class);
     @Autowired
     private VideoHibernateRepository videoDAO;
     private final String[] resolutions = {"180", "360", "480", "720" };
@@ -33,10 +33,11 @@ public final class VideoService {
         return videoDAO.findAll();
     }
 
-    public void updateVideo(final Video video, boolean updateDate) {
+    public void updateVideo(final Video video, boolean updateDate) throws IllDataException {
         if (updateDate) {
             video.setPubDate(new Date());
         }
+        verifyVideo(video);
         videoDAO.edit(video);
     }
 
@@ -70,6 +71,7 @@ public final class VideoService {
         return videoDAO.findBetween(condition).size();
     }
 
+
     public void addVideo(final Video video) throws IllDataException {
         video.setDuration(0L);
         if (video.getSort() == null) {
@@ -78,6 +80,7 @@ public final class VideoService {
         if (video.getRecommend() == null) {
             video.setRecommend(0);
         }
+        verifyVideo(video);
         video.setStatus(VideoStatus.VERIFY);
         videoDAO.edit(video);
     }
@@ -92,6 +95,37 @@ public final class VideoService {
         }
         videoDAO.edit(video);
         return video;
+    }
+    private void verifyVideo(Video video) throws IllDataException {
+        if (video.getFile() == null) {
+            throw new IllDataException("视频编号 不能省略");
+        } else {
+            final Video validateVideo = find(video.getFile());
+            LOG.debug("validate video : {}", validateVideo);
+            if (validateVideo != null) {
+                if (video.getId() == null) {
+                    throw new IllDataException("视频编号已被占用");
+                } else {
+                    if (!video.getId().equals(validateVideo.getId())) {
+                        throw new IllDataException("视频编号 " + video.getFile() + " 已被 " + validateVideo.getTitle() + " 使用");
+                    }
+                }
+            }
+        }
+        if (video.getTitle() == null) {
+            throw new IllDataException("视频标题 不能省略");
+        }
+        if (video.getShootTime() == null) {
+            throw new IllDataException("必须设置 拍摄日期");
+        }
+        if (video.getSort() > 0) {
+            final Video model = new Video();
+            model.setSort(video.getSort());
+            final Video validateVideo = findVideo(model);
+            if (validateVideo != null && (video.getId() == null || (video.getId()!= validateVideo.getId()))) {
+                throw new IllDataException("发布序号 " + video.getSort() + " 已被编号为 " + validateVideo.getFile() + " 的视频使用");
+            }
+        }
     }
 
     private void verifyFiles(Video video) throws IOException, IllDataException {
@@ -152,14 +186,16 @@ public final class VideoService {
         if (isUpdateDate) {
             video.setPubDate(new Date());
         }
+        verifyVideo(video);
         video.setStatus(VideoStatus.PUBLISH);
         videoDAO.edit(video);
     }
 
-    public void updateAndArchive(Video video, boolean isUpdateDate) {
+    public void updateAndArchive(Video video, boolean isUpdateDate) throws IllDataException {
         if (isUpdateDate) {
             video.setPubDate(new Date());
         }
+        verifyVideo(video);
         video.setStatus(VideoStatus.ARCHIVE);
         videoDAO.edit(video);
     }
