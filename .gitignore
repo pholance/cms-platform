@@ -13,8 +13,6 @@ hs_err_pid*
 /target/
 node_modules
 #webapp目录由gulp生成但项目配置需要管理
-/src/main/webapp/resources
-src/main/frontend/lib
 # Created by .ignore support plugin (hsz.mobi)
 .idea
 src/main/frontend/bower_components
@@ -23,8 +21,6 @@ src/main/webapp/*
 !src/main/webapp/WEB-INF
 !src/main/webapp/META-INF
 *.iml
-/src/main/frontend/src/resources
-/src/main/frontend/src/library
 .temp
 target
 

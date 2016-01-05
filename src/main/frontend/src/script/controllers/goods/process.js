@@ -27,7 +27,7 @@ angular.module('app')
         };
         $scope.trash = function (id) {
             $http.put('/api/goods/trash/' + id).then(function (data) {
-                $scope.$parent.$broadcast('serverResponsed', data.data);
+                $scope.$root.$broadcast('serverResponsed', data.data);
                 $scope.dtInstance.reloadData();
             });
         };

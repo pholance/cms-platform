@@ -125,7 +125,6 @@ gulp.task('clean', function (cb) {
         path.web + '/*',
         '!' + path.web + 'WEB-INF',
         '!' + path.web + 'META-INF',
-        'src/library',
         path.target + '/*',
         '!' + path.target + 'WEB-INF',
         '!' + path.target + 'META-INF'
@@ -133,12 +132,12 @@ gulp.task('clean', function (cb) {
 });
 gulp.task('build:library', function () {
     return gulp.src([
+            'src/library/**/*',
             //angularjs
             'bower_components/angular-sanitize/angular-sanitize.min.js',
-            'bower_components/angular-masonry/angular-masonry.js',
             'bower_components/angular-xeditable/dist/js/xeditable.min.js',
             'bower_components/angular-xeditable/dist/css/xeditable.css',
-            'bower_components/ng-flow/dist/ng-flow-standalone.min.js',
+            'bower_components/angular-ueditor/dist/angular-ueditor.min.js',
             //videogular
             'bower_components/videogular-angulartics/vg-analytics.min.js',
             'bower_components/videogular-buffering/vg-buffering.min.js',

@@ -82,6 +82,7 @@ public final class VideoService {
         }
         verifyVideo(video);
         video.setStatus(VideoStatus.VERIFY);
+        video.setCreateDate(new Date());
         videoDAO.edit(video);
     }
 
@@ -122,7 +123,7 @@ public final class VideoService {
             final Video model = new Video();
             model.setSort(video.getSort());
             final Video validateVideo = findVideo(model);
-            if (validateVideo != null && (video.getId() == null || (video.getId()!= validateVideo.getId()))) {
+            if (validateVideo != null && (video.getId() == null || (!video.getId().equals(validateVideo.getId())))) {
                 throw new IllDataException("发布序号 " + video.getSort() + " 已被编号为 " + validateVideo.getFile() + " 的视频使用");
             }
         }

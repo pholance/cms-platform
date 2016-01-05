@@ -142,7 +142,7 @@ angular.module('app')
                     case 300:
                         type = 4;
                         message = '操作失败';
-                        timeout = null;
+                        timeout = 0;
                 }
                 //noinspection JSUnresolvedVariable
                 if (response.forwardUrl) {
@@ -151,6 +151,9 @@ angular.module('app')
                 }
                 //noinspection JSUnresolvedVariable
                 toaster.pop(toasterType[type], message, response.message, timeout);
+            });
+            $scope.$on('alterPOP', function (event, message) {
+                toaster.pop(toasterType[message.type], message.title, message.text, message.time);
             });
         }
     ])
@@ -166,9 +169,9 @@ angular.module('app')
     }])
     .controller('SidebarController', ['$scope', function ($scope) {
         'use strict';
-        $scope.$on('$includeContentLoaded', function () {
-            //Layout.initSidebar(); // init sidebar
-        });
+        $scope.toggle = function (flag) {
+            $scope[flag] = !$scope[flag];
+        };
     }])
     .controller('FooterController', ['$scope', function ($scope) {
         'use strict';

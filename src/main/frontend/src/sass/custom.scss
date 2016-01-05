@@ -107,3 +107,18 @@ body {
   vertical-align: top;
 }
 
+.form-file {
+  position: relative;
+  width: 116px;
+  height: 34px;
+  input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 116px;
+    height: 34px;
+    cursor: pointer;
+  }
+}
+

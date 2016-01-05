@@ -132,23 +132,39 @@ angular.module('app')
                     },
                     controller: 'trashController'
                 })
-                .state('material', {
-                    abstract: true,
-                    url: '/material',
-                    template: '<div class="fade-in-up-big" ui-view></div>'
+                .state('wechat', {
+                    url: '/wechat',
+                    templateUrl: '/platform/tpl/sidebar/wechat.html'
                 })
-                .state('material.picture', {
-                    url: '/picture',
-                    templateUrl: '/material/picture.html',
+                .state('wechat.material-image', {
+                    abstract: true,
+                    url: '/image',
+                    template: '<div ui-view></div>'
+                })
+                .state('wechat.material-image.list', {
+                    url: '/list',
+                    templateUrl: '/material/image/list.html',
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
-                            return $ocLazyLoad.load(['/js/controllers/material/picture.js',
-                                'angularMasonry']);
+                            return $ocLazyLoad.load('/script/controllers/material/picture.js');
                         }]
                     },
                     controller: 'material-picture'
                 })
-                .state('material.audio', {
+                .state('wechat.material-image.create', {
+                    url: '/create',
+                    templateUrl: '/material/image/create.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load('angularFileUpload').then(function () {
+                                return $ocLazyLoad.load('/script/controllers/material/picture.js');
+                            });
+                        }]
+                    },
+                    controller:'image-create'
+                })
+
+                .state('wechat.material-audio', {
                     url: '/audio',
                     templateUrl: '/material/audio.html',
                     resolve: {
@@ -161,14 +177,14 @@ angular.module('app')
                                     'com.2fdevs.videogular.plugins.buffering',
                                     'com.2fdevs.videogular.plugins.overlayplay'
                                 ]).then(function () {
-                                        return $ocLazyLoad.load('/js/controllers/material/audio.js');
+                                        return $ocLazyLoad.load('/script/controllers/material/audio.js');
                                     }
                                 );
                             }]
                     },
                     controller: 'material-audio'
                 })
-                .state('material.video', {
+                .state('wechat.material-video', {
                     url: '/video',
                     templateUrl: '/material/video.html',
                     resolve: {
@@ -182,29 +198,34 @@ angular.module('app')
                                     'com.2fdevs.videogular.plugins.overlayplay',
                                     'com.2fdevs.videogular.plugins.imaads'
                                 ]).then(function () {
-                                    return $ocLazyLoad.load('/js/controllers/material/video.js');
+                                    return $ocLazyLoad.load('/script/controllers/material/video.js');
                                 });
                             }]
                     },
                     controller: 'material-video'
                 })
-                .state('material.page', {
-                    url: '/page',
-                    templateUrl: '/material/page.html',
+                .state('wechat.material-page', {
+                    abstract: true,
+                    url: '/material/page',
+                    template: '<div ui-view></div>'
+                })
+                .state('wechat.material-page.create', {
+                    url: '/create',
+                    templateUrl: '/material/page/create.html',
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
-                            return $ocLazyLoad.load([]);
+                            return $ocLazyLoad.load('UEditor').then(function () {
+                                return $ocLazyLoad.load('angularUEditor').then(function () {
+                                    return $ocLazyLoad.load('/script/controllers/material/page.js');
+                                });
+                            });
                         }]
-                    }
+                    },
+                    controller:'page-create'
                 })
-                .state('material.aritcle', {
+                .state('wechat.material-aritcle', {
                     url: '/aritcle',
                     templateUrl: '/material/aritcle.html'
-                })
-                .state('wechat', {
-                    url: '/wechat',
-                    abstract: true,
-                    template: '<div ui-view></div>'
                 })
                 .state('wechat.replyRule', {
                     url: '/reply-rule',
@@ -212,8 +233,8 @@ angular.module('app')
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                '/js/controllers/wechat/replyRule.js',
-                                '/js/directives/message-editor.js']);
+                                '/script/controllers/wechat/replyRule.js',
+                                '/script/directives/message-editor.js']);
                         }]
                     },
                     controller: 'wechat-replyRule'

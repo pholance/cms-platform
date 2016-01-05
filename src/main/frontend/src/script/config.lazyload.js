@@ -16,8 +16,25 @@ angular.module('app')
             events: true,
             modules: [
                 {
-                    name:'echarts',
-                    files:[
+                    name: 'UEditor',
+                    files: [
+                        '/library/ueditor/ueditor.config.js',
+                        '/library/ueditor/ueditor.all.min.js'
+                    ]
+                },
+                {
+                    name: 'angularUEditor',
+                    files: ['/library/angular-ueditor.min.js']
+                },
+                {
+                    name: 'angularFileUpload',
+                    files: [
+                        'http://cdn.bootcss.com/angular-file-upload/2.2.0/angular-file-upload.min.js'
+                    ]
+                },
+                {
+                    name: 'echarts',
+                    files: [
                         'http://apps.bdimg.com/libs/echarts/2.1.9/source/echarts-all.js',
                     ]
                 },
@@ -34,18 +51,6 @@ angular.module('app')
                     name: 'ngSanitize',
                     files: [
                         '/library/angular-sanitize.min.js'
-                    ]
-                },
-                {
-                    name: 'ngFlow',
-                    files: [
-                        'http://cdn.bootcss.com/ng-flow/2.6.1/ng-flow-standalone.min.js'
-                    ]
-                },
-                {
-                    name: 'flowjs',
-                    files: [
-                        'http://cdn.bootcss.com/flow.js/2.9.0/flow.min.js'
                     ]
                 },
                 {

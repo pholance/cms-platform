@@ -1,0 +1,75 @@
+<!-- BEGIN SIDEBAR -->
+<div data-ng-controller="SidebarController" class="page-sidebar-wrapper">
+    <div ui-nav class="page-sidebar navbar-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+        <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+        <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+        <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <ul class="page-sidebar-menu page-sidebar-menu-light"
+            ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
+            <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+            <li class="heading">
+                <h3>素材管理</h3>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="wechat.material-image">
+                    <span class="icon-picture"></span>
+                    <span class="title margin-left-xs">图片素材管理</span>
+                    <span class="arrow"></span>
+                    <span class="selected"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li ui-sref-active="active">
+                        <a ui-sref="wechat.material-image.list">查看图片素材</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="wechat.material-image.create">上传图片素材</a>
+                    </li>
+                </ul>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="wechat.material-audio">
+                    <span class="icon-playlist"></span>
+                    <span class="title margin-left-xs">音频</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a>
+                    <span class="icon-screen-smartphone"></span>
+                    <span class="title margin-left-xs">页面</span>
+                    <span class="arrow"></span>
+                    <span class="selected"></span>
+                    <span  ui-sref="wechat.material-page"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li ui-sref-active="active"><a ui-sref="wechat.material-page.create">创建页面素材</a></li>
+                </ul>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="wechat.material-aritcle">
+                    <span class="icon-credit-card"></span>
+                    <span class="title margin-left-xs">图文</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+</div>
+<!-- END SIDEBAR -->
+
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <div ui-container class="page-content">
+
+        <!-- BEGIN ACTUAL CONTENT -->
+        <div ui-view>
+        </div>
+        <!-- END ACTUAL CONTENT -->
+    </div>
+</div>
+<!-- END CONTENT -->
