@@ -65,9 +65,7 @@ angular.module('app')
                     templateUrl: '/video/manager.html',
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
-                            return $ocLazyLoad.load('ngFlow').then(function () {
                                 return $ocLazyLoad.load('/script/controllers/video/manager.js');
-                            });
                         }]
                     },
                     controller: 'managerController'
