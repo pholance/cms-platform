@@ -15,11 +15,12 @@
                 <h3>素材管理</h3>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="wechat.material-image">
+                <a>
                     <span class="icon-picture"></span>
                     <span class="title margin-left-xs">图片素材管理</span>
                     <span class="arrow"></span>
                     <span class="selected"></span>
+                    <span  ui-sref="wechat.material-image"></span>
                 </a>
                 <ul class="sub-menu">
                     <li ui-sref-active="active">
@@ -46,6 +47,7 @@
                     <span  ui-sref="wechat.material-page"></span>
                 </a>
                 <ul class="sub-menu">
+                    <li ui-sref-active="active"><a ui-sref="wechat.material-page.list">查看页面素材</a></li>
                     <li ui-sref-active="active"><a ui-sref="wechat.material-page.create">创建页面素材</a></li>
                 </ul>
             </li>
@@ -55,6 +57,21 @@
                     <span class="title margin-left-xs">图文</span>
                     <span class="selected"></span>
                 </a>
+            </li>
+            <li class="heading">
+                <h3>消息管理</h3>
+            </li>
+            <li ui-sref-active="active">
+                <a>
+                    <span class="icon-share"></span>
+                    <span class="title margin-left-xs">消息群发管理</span>
+                    <span class="arrow"></span>
+                    <span class="selected"></span>
+                    <span ui-sref="wechat.message-mass"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li ui-sref-active="active"><a ui-sref="wechat.message-mass.sends">群发一条消息</a></li>
+                </ul>
             </li>
         </ul>
         <!-- END SIDEBAR MENU -->

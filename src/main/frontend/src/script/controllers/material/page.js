@@ -3,6 +3,13 @@
  * 2016年01月03日
  */
 angular.module('app')
+    .controller('page-list', ['$scope', '$http', function ($scope, $http) {
+        'use strict';
+        $http.get('/api/material/pages').then(function (data) {
+            $scope.pages = data.data;
+        });
+    }]);
+angular.module('app')
     .controller('page-create', ['$scope', '$http', function ($scope, $http) {
         'use strict';
         $scope.submit = function () {

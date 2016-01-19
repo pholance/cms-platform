@@ -65,7 +65,7 @@ angular.module('app')
                     templateUrl: '/video/manager.html',
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
-                                return $ocLazyLoad.load('/script/controllers/video/manager.js');
+                            return $ocLazyLoad.load('/script/controllers/video/manager.js');
                         }]
                     },
                     controller: 'managerController'
@@ -136,7 +136,7 @@ angular.module('app')
                 })
                 .state('wechat.material-image', {
                     abstract: true,
-                    url: '/image',
+                    url: '/material/image',
                     template: '<div ui-view></div>'
                 })
                 .state('wechat.material-image.list', {
@@ -159,11 +159,11 @@ angular.module('app')
                             });
                         }]
                     },
-                    controller:'image-create'
+                    controller: 'image-create'
                 })
 
                 .state('wechat.material-audio', {
-                    url: '/audio',
+                    url: '/material/audio',
                     templateUrl: '/material/audio.html',
                     resolve: {
                         deps: ['$ocLazyLoad',
@@ -183,7 +183,7 @@ angular.module('app')
                     controller: 'material-audio'
                 })
                 .state('wechat.material-video', {
-                    url: '/video',
+                    url: '/material/video',
                     templateUrl: '/material/video.html',
                     resolve: {
                         deps: ['$ocLazyLoad',
@@ -205,11 +205,7 @@ angular.module('app')
                 .state('wechat.material-page', {
                     abstract: true,
                     url: '/material/page',
-                    template: '<div ui-view></div>'
-                })
-                .state('wechat.material-page.create', {
-                    url: '/create',
-                    templateUrl: '/material/page/create.html',
+                    template: '<div ui-view></div>',
                     resolve: {
                         deps: ['$ocLazyLoad', function ($ocLazyLoad) {
                             return $ocLazyLoad.load('UEditor').then(function () {
@@ -218,11 +214,20 @@ angular.module('app')
                                 });
                             });
                         }]
-                    },
-                    controller:'page-create'
+                    }
+                })
+                .state('wechat.material-page.create', {
+                    url: '/create',
+                    templateUrl: '/material/page/create.html',
+                    controller: 'page-create'
+                })
+                .state('wechat.material-page.list', {
+                    url: '/list',
+                    templateUrl: '/material/page/list.html',
+                    controller: 'page-list'
                 })
                 .state('wechat.material-aritcle', {
-                    url: '/aritcle',
+                    url: '/material/aritcle',
                     templateUrl: '/material/aritcle.html'
                 })
                 .state('wechat.replyRule', {
@@ -237,12 +242,25 @@ angular.module('app')
                     },
                     controller: 'wechat-replyRule'
                 })
-                .state('wechat.newsMessage', {
-                    url: '/news',
-                    templateUrl: '/wechat/news_manager.html'
+                .state('wechat.message-mass', {
+                    abstract: true,
+                    url: '/message',
+                    template: '<div ui-view></div>',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load('UEditor').then(function () {
+                                return $ocLazyLoad.load('angularUEditor').then(function () {
+                                    return $ocLazyLoad.load('/script/controllers/wechat/mass.js');
+                                });
+                            });
+                        }]
+                    }
                 })
-                .state('wechat.mass', {
+                .state('wechat.message-mass.sends', {
                     url: '/mass',
-                    templateUrl: '/wechat/mass_message.html'
-                });
-        }]);
+                    templateUrl: '/wechat/mass_message.html',
+                    controller: 'mass'
+                })
+            ;
+        }])
+;

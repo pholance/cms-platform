@@ -1,0 +1,50 @@
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-wechat"></i>
+            <a ui-sref="wechat">微信管理</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>消息管理</li>
+    </ul>
+</div>
+<h3 class="page-title">消息群发</h3>
+<div class="col-sm-4">
+    <div class="news">
+        <div class="aritcle" ng-class="{'active':currentIndex===$index}" ng-repeat="aritcle in aritcles"
+             ng-click="setCurrentAritcle($index)">
+            <div class="title" ng-show="aritcle.title">{{aritcle.title}}</div>
+            <div class="title" ng-hide="aritcle.title">请设置标题</div>
+            <img ng-src="{{aritcle.picUrl}}" alt="pic" ng-show="aritcle.picUrl">
+
+            <div class="btn-select-image" ng-hide="aritcle.picUrl">
+                <div>
+                    <span class="fa fa-image"></span>
+                </div>
+            </div>
+        </div>
+        <div class="aritcle full-block" ng-click="addAritcle()">
+            <div>添加一条图文</div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-8">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <span class="btn btn-info">设置标题图片</span><span>{{aritcle.picUrl}}</span>
+            <div class="form-group">
+                <label for="title">标题</label>
+                <input type="text" id="title" class="form-control" ng-model="aritcle.title">
+            </div>
+            <div class="form-group">
+                <label for="desc">描述</label>
+                <textarea id="desc" class="form-control" ng-model="aritcle.description"></textarea>
+                <span class="help-block">描述信息用于微信转发、朋友圈分享以及单图文</span>
+            </div>
+            <div class="form-group">
+                <div class="ueditor" ng-model="aritcle.content"></div>
+            </div>
+            <button class="btn btn-primary">提交</button>
+        </div>
+    </div>
+</div>

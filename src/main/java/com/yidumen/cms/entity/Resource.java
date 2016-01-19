@@ -52,6 +52,7 @@ public class Resource {
 
     @JsonSerialize(using = DateSerializer.class)
     @JsonDeserialize(using = DateDeserializer.class)
+    @JsonView(JacksonView.Less.class)
     public Date getCreateDate() {
         return createDate;
     }

@@ -1,5 +1,7 @@
 package com.yidumen.cms.view.ajax;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.yidumen.cms.JacksonView;
 import com.yidumen.cms.entity.Audio;
 import com.yidumen.cms.entity.Image;
 import com.yidumen.cms.entity.Page;
@@ -74,5 +76,11 @@ public final class ResourceController {
     public DWZResponse createPage(@RequestBody Page page) {
         service.createPage(page);
         return DWZResponseBuilder.initiate().success("成功创建页面 " + page.getTitle()).forwardUrl("/wechat/material/page/list").builder();
+    }
+
+    @RequestMapping(path = "pages", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @JsonView(JacksonView.Less.class)
+    public List<Page> listPages() {
+        return service.getPages();
     }
 }

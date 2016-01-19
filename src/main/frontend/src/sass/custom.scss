@@ -1,10 +1,15 @@
-@import "global/_variables";
-
+@import "global/variables";
+html{
+  min-height: 100%;
+}
 body {
+  @extend html;
   -webkit-font-smoothing: subpixel-antialiased;
   -moz-osx-font-smoothing: auto;
 }
-
+.page-content{
+  min-height: 100%;
+}
 .page-header, .page-sidebar {
   font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
 }
@@ -122,3 +127,107 @@ body {
   }
 }
 
+.news {
+  width: 290px;
+  background-color: $panel-bg;
+  border-radius: $panel-border-radius;
+  border: 1px solid $panel-border;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  & > .aritcle:first-child {
+    display: block;
+    height: 160px;
+    position: relative;
+    & > .title {
+      display: block;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      line-height: 28px;
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      right: 8px;
+      width: auto;
+    }
+    & > img {
+      width: 100%;
+      height: 100%;
+      position: static;
+      margin: 0;
+    }
+    & > .btn-select-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      border: 2px dashed $panel-border;
+      position: relative;
+      div {
+        position: absolute;
+        margin: auto;
+        width: 64px;
+        height: 64px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: darkgray;
+        & > span, & > i {
+          font-size: 36px;
+        }
+        & > p {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  & > .aritcle {
+    &.active {
+      background-color: $brand-primary;
+      &:hover{
+        background-color: $brand-primary;
+      }
+    }
+    display: table;
+    position: relative;
+    border-bottom: solid 1px $panel-border;
+    padding: 8px;
+    cursor: pointer;
+    &:hover {
+      background-color: $brand-light;
+    }
+    & > .title {
+      padding-left: 8px;
+      padding-right: 8px;
+      display: table-cell;
+      width: 223px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    & > img {
+      display: table-cell;
+      width: 50px;
+      height: 50px;
+    }
+    & > .btn-select-image {
+      display: table-cell;
+      width: 50px;
+      height: 50px;
+      border: 2px dashed $panel-border;
+      position: relative;
+      color: darkgray;
+      & > span, & > i {
+        font-size: 24px;
+      }
+      p {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+.full-block {
+  width: 100%;
+  text-align: center;
+}

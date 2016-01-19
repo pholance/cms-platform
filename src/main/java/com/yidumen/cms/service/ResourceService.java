@@ -97,4 +97,8 @@ public final class ResourceService {
         page.setCreateDate(new Date());
         pageRepository.create(page);
     }
+
+    public List<Page> getPages() {
+        return pageRepository.findAll();
+    }
 }
