@@ -1,5 +1,8 @@
 package com.yidumen.cms.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.yidumen.cms.JacksonView;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -55,6 +58,7 @@ public class Sutra implements Serializable {
     @Column(name = "content", columnDefinition = "MEDIUMTEXT")
     private String content;
 
+    @JsonView(JacksonView.Less.class)
     public Long getId() {
         return id;
     }
@@ -63,6 +67,7 @@ public class Sutra implements Serializable {
         this.id = id;
     }
 
+    @JsonView(JacksonView.Less.class)
     public String getPartIdentifier() {
         return partIdentifier;
     }
@@ -71,6 +76,7 @@ public class Sutra implements Serializable {
         this.partIdentifier = partIdentifier;
     }
 
+    @JsonView(JacksonView.Less.class)
     public String getTitle() {
         return title;
     }
@@ -79,6 +85,7 @@ public class Sutra implements Serializable {
         this.title = title;
     }
 
+    @JsonView(JacksonView.Normal.class)
     public Long getLeftValue() {
         return leftValue;
     }
@@ -87,6 +94,7 @@ public class Sutra implements Serializable {
         this.leftValue = leftValue;
     }
 
+    @JsonView(JacksonView.Normal.class)
     public Long getRightValue() {
         return rightValue;
     }
@@ -95,6 +103,7 @@ public class Sutra implements Serializable {
         this.rightValue = rightValue;
     }
 
+    @JsonView(JacksonView.MuchMore.class)
     public List<Tag> getTags() {
         return tags;
     }
@@ -103,6 +112,7 @@ public class Sutra implements Serializable {
         this.tags = tags;
     }
 
+    @JsonView(JacksonView.More.class)
     public String getContent() {
         return content;
     }

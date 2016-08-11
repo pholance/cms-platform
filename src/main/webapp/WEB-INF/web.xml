@@ -65,6 +65,7 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/api/*</url-pattern>
         <url-pattern>/oss/*</url-pattern>
+        <url-pattern>/resources/*</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

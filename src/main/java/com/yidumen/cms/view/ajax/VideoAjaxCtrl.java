@@ -38,14 +38,14 @@ public class VideoAjaxCtrl {
     private ApplicationContext context;
 
     @Transactional(readOnly = true)
-    @RequestMapping("info")
+    @RequestMapping(path = "info", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @JsonView(JacksonView.Less.class)
     public List<Video> info() {
         return service.getVideos();
     }
 
     @Transactional(readOnly = true)
-    @RequestMapping("detail/{id}")
+    @RequestMapping(path = "detail/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @JsonView(JacksonView.More.class)
     public Video detail(@PathVariable Long id) {
         return service.find(id);

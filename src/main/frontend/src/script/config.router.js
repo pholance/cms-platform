@@ -130,6 +130,22 @@ angular.module('app')
                     },
                     controller: 'trashController'
                 })
+                .state('site.sutra-manager', {
+                    url: '/sutra/manager',
+                    templateUrl: '/sutra/edit.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                            return $ocLazyLoad.load('UEditor').then(function () {
+                                return $ocLazyLoad.load('angularUEditor').then(function () {
+                                    return $ocLazyLoad.load('angularUITree').then(function () {
+                                        return $ocLazyLoad.load('/script/controllers/sutra/edit.js');
+                                    });
+                                });
+                            });
+                        }]
+                    },
+                    controller: 'sutra-edit'
+                })
                 .state('wechat', {
                     url: '/wechat',
                     templateUrl: '/platform/tpl/sidebar/wechat.html'

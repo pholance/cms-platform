@@ -10,6 +10,9 @@ angular.module('app')
                 data: '=clipInfoChart'
             },
             link: function ($scope, $element) {
+                console.log($element.parents('#container'));
+                console.log($element.parents('#container').height());
+                console.log($element.parents('#container').width());
                 $element.height($element.parents('#container').height() - 1 - 19.2 * 3 - 1 - 25 - 28.8);
                 $element.width($element.parents('#container').width());
                 var chart = echarts.init($element.get());
@@ -63,7 +66,7 @@ angular.module('app')
                             },
                             data: categories.map(function (item, index) {
                                 if (item === clip.recording.file) {
-                                    console.log(item, clip.recording.file)
+                                    //console.log(item, clip.recording.file)
                                     return clip.start - lastValue[index];
                                 } else {
                                     return '-';

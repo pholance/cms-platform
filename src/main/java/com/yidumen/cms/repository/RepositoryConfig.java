@@ -2,6 +2,7 @@ package com.yidumen.cms.repository;
 
 import com.yidumen.cms.entity.Account;
 import com.yidumen.cms.entity.Page;
+import com.yidumen.cms.entity.Sutra;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,5 +26,10 @@ public class RepositoryConfig {
     @Bean
     public HibernateRepository<Page> pageRepository() {
         return new HibernateRepository<>(Page.class, sessionFactory);
+    }
+
+    @Bean
+    public HibernateRepository<Sutra> sutraRepository() {
+        return new HibernateRepository<>(Sutra.class, sessionFactory);
     }
 }

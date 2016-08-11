@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().headers().frameOptions().sameOrigin().and()
                 .authorizeRequests()
-                .antMatchers("/", "/index.html", "/css/**", "/script/**", "/oss/**", "/api/wechat/**", "/library/**").permitAll()
+                .antMatchers("/", "/index.html", "/css/**", "/script/**", "/oss/**", "/api/wechat/**", "/library/**", "/resources/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

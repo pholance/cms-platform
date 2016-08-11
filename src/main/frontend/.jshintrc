@@ -7,7 +7,7 @@
   "expr": true,
   "immed": true,
   "indent": 2,
-//  "maxlen": 200,
+  //  "maxlen": 200,
   "newcap": true,
   "noarg": true,
   "quotmark": "single",
@@ -15,6 +15,7 @@
   "unused": true,
   "strict": true,
   "trailing": true,
+  "loopfunc": true,
   "globals": {
     "define": true,
     "module": true

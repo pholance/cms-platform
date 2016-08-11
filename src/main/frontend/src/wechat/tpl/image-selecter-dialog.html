@@ -1,4 +1,4 @@
-<div>
+<div class="modal-header">
     <div class="row">
         <div class="col-xs-12 col-sm-5">
             <ul class="list-inline">
@@ -21,7 +21,8 @@
             </div>
         </div>
     </div>
-    <hr class="m-t-none">
+</div>
+<div class="modal-body">
     <ul class="list-inline">
         <li ng-repeat="picture in currentGroup|limitTo:pageSize:(currentPage-1)*pageSize">
             <div class="item" ng-click="selectImage($index)">
@@ -49,4 +50,7 @@
                             last-text="&raquo;"></uib-pagination>
         </div>
     </div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-primary" ng-click="cancel()">确定</button>
 </div>

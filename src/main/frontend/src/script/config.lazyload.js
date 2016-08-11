@@ -16,6 +16,13 @@ angular.module('app')
             events: true,
             modules: [
                 {
+                    name: 'angularUITree',
+                    files: [
+                        'http://cdn.bootcss.com/angular-ui-tree/2.13.0/angular-ui-tree.min.css',
+                        'http://cdn.bootcss.com/angular-ui-tree/2.13.0/angular-ui-tree.min.js'
+                    ]
+                },
+                {
                     name: 'UEditor',
                     files: [
                         '/library/ueditor/ueditor.config.js',
